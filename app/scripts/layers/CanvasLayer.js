@@ -8,6 +8,8 @@ define([
   'mps'
 ], function(Class) {
 
+  'use strict';
+
   var CanvasLayer = Class.extend({
 
     init: function () {
@@ -27,9 +29,9 @@ define([
      */
     getTile: function(coord, zoom, ownerDocument) {
       var canvas = ownerDocument.createElement('canvas');
-      canvas.style.border  = "none";
-      canvas.style.margin  = "0";
-      canvas.style.padding = "0";
+      canvas.style.border  = 'none';
+      canvas.style.margin  = '0';
+      canvas.style.padding = '0';
 
       var ctx = canvas.getContext('2d');
       ctx.width = canvas.width = this.tileSize.width;
@@ -70,7 +72,7 @@ define([
         }
       }
 
-      var url = this.urlTemplate.replace("%z", z).replace("%x", x).replace("%y", y)
+      var url = this.urlTemplate.replace('%z', z).replace('%x', x).replace('%y', y);
 
       xhr.onload = function () {
         var url = URL.createObjectURL(this.response),
@@ -126,7 +128,7 @@ define([
      */
     filterTile: function(canvas, zoom) {
       var ctx = canvas.getContext('2d');
-          coord = canvas.coord;
+      var coord = canvas.coord;
 
       if (canvas.coord) {
         var zsteps = coord.z - this.dataMaxZoom;

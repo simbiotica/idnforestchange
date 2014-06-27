@@ -21,10 +21,11 @@
   "strict": true,
   "trailing": true,
   "undef": true,
-  "unused": true,
   "expr": true,
 
   "predef": [
-    "define"
+    "define",
+    "google",
+    "router"
   ]
 }

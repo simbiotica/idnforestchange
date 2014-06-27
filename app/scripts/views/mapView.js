@@ -10,7 +10,7 @@ define([
 
   var MapView = Backbone.View.extend({
 
-     el: '.map',
+    el: '.map',
 
     initialize: function() {
       _.bindAll(this, 'toggleLayer', 'addLayer');
@@ -21,7 +21,7 @@ define([
       this.render();
     },
 
-    render: function(options) {
+    render: function() {
       var options = {
         minZoom: 3,
         zoom: 3,

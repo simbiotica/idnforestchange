@@ -1,8 +1,9 @@
 
 define([
+  'underscore',
   'layers/CanvasLayer',
   'mps'
-], function(CanvasLayer, mps) {
+], function(_, CanvasLayer, mps) {
 
   'use strict';
 

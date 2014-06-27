@@ -8,7 +8,7 @@ define([
 
   var LayersNavView = Backbone.View.extend({
 
-     el: '.layers-nav',
+    el: '.layers-nav',
 
     events: {
       'click li': 'toggleLayer'
