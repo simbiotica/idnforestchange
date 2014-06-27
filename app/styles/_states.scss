@@ -1,0 +1,14 @@
+.is-hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+.is-clearfix {
+  &:before, &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
