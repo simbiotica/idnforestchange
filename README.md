@@ -10,7 +10,6 @@ Install globally dependencies:
 
     npm install -g grunt-cli bower
 
-
 ## To install
 
     bundle install

@@ -5,5 +5,5 @@
 .grunt
 node_modules
 app/.tmp
-app/vendor
+app/vendor/*
 dist
