@@ -5,4 +5,17 @@
   left: 0;
   right: 0;
   margin: auto;
+
+  ul {
+    width: 100%;
+    height: 100%;
+  }
+
+  li {
+    float: left;
+    padding: 10px;
+    display: inline-block;
+    margin-right: 4px;
+  }
+
 }

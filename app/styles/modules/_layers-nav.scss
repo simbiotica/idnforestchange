@@ -5,19 +5,33 @@
 
   .layers {
     height: 100%;
+    width: 100%;
   }
 
   .layers li {
-    display: inline-block;
     float: left;
-    height: 100%;
-    padding: 0 10px;
+    padding: 8px 10px;
+    display: inline-block;
+    border-right: 1px solid #aaa;
+
     text-align: center;
     cursor: pointer;
 
-    &.selected {
-      color: red;
+    &:last-child {
+      border-right: none;
     }
-  }
 
+    &:before {
+      content: ' \25CF';
+      font-size: 15px;
+      color: #ddd;
+      margin-right: 3px;
+    }
+
+    &.selected,
+    &.selected:before {
+      color: green;
+    }
+
+  }
 }

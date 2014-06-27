@@ -11,3 +11,11 @@
 @mixin grid($column) {
   width: ((100 / $grid-columns) * $column) - ($grid-gutter-width * 2);
 }
+
+@mixin unselectable() {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
