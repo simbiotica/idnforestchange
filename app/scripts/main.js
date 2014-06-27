@@ -6,9 +6,10 @@ require.config({
     jquery: '../vendor/jquery/dist/jquery',
     underscore: '../vendor/underscore/underscore',
     backbone: '../vendor/backbone/backbone',
-    class: '../vendor/Class.js/Class',
+    Class: '../vendor/Class.js/Class',
     gmap: 'gmap',
     text: '../vendor/requirejs-text/text',
+    mps: '../vendor/minpubsub/minpubsub'
   },
 
   shim: {
@@ -22,7 +23,7 @@ require.config({
       deps: ['jquery', 'underscore'],
       exports: 'Backbone'
     },
-    class: {
+    Class: {
       exports: 'Class'
     }
   }
@@ -34,8 +35,7 @@ require.config({
  */
 require([
   'backbone',
-  'utils'
-], function(gmap, MapView) {
+], function(Backbone) {
 
   require(['router'],
     function(router) {

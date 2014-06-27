@@ -5,14 +5,15 @@
  */
 define([
   'Class',
-  'uri'
-], function(Class, UriTemplate) {
+  'mps'
+], function(Class) {
 
   var CanvasLayer = Class.extend({
 
     init: function () {
       this.tileSize = new google.maps.Size(256, 256);
       this.tiles = {};
+      this.params = {};
     },
 
     /**
@@ -69,8 +70,7 @@ define([
         }
       }
 
-      var params = {z: z, x: x, y: y};
-      var url = new UriTemplate(this._urlTemplate).fillFromObject(urlParams);
+      var url = this.urlTemplate.replace("%z", z).replace("%x", x).replace("%y", y)
 
       xhr.onload = function () {
         var url = URL.createObjectURL(this.response),

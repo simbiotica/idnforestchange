@@ -1,0 +1,23 @@
+.layers-nav {
+  height: 35px;
+  top: 30px;
+  right: 40px;
+
+  .layers {
+    height: 100%;
+  }
+
+  .layers li {
+    display: inline-block;
+    float: left;
+    height: 100%;
+    padding: 0 10px;
+    text-align: center;
+    cursor: pointer;
+
+    &.selected {
+      color: red;
+    }
+  }
+
+}

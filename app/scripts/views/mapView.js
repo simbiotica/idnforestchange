@@ -1,12 +1,10 @@
-/**
- * The MapView class for the Google Map.
- *
- * @return MapView class (extends Backbone.View)
- */
 define([
   'backbone',
-  'underscore'
-], function(Backbone, _) {
+  'underscore',
+  'mps',
+  'layers/ForestChangeLayer',
+  'layers/ForestTypeLayer'
+], function(Backbone, _, mps, ForestChangeLayer, ForestTypeLayer) {
 
   'use strict';
 
@@ -15,6 +13,15 @@ define([
      el: '.map',
 
     initialize: function() {
+      _.bindAll(this, 'toggleLayer', 'addLayer');
+
+      this.forestChangeLayer = new ForestChangeLayer();
+      this.forestTypeLayer = new ForestTypeLayer();
+
+      this.render();
+    },
+
+    render: function(options) {
       var options = {
         minZoom: 3,
         zoom: 3,
@@ -22,73 +29,61 @@ define([
         center: new google.maps.LatLng(20.50, -4.72)
       };
 
-      this.render(options);
-    },
-
-    /**
-     * Creates the Google Maps and attaches it to the DOM.
-     */
-    render: function(options) {
       this.map = new google.maps.Map(this.el, options);
       this.resize();
-      this._addListeners();
+      this.addListeners();
     },
 
-    /**
-     * Wires up Google Maps API listeners so that the view can respond to user
-     * events fired by the UI.
-     */
-    _addListeners: function() {
+    addListeners: function(argument) {
+      mps.subscribe('map/toggle-layer', this.toggleLayer);
     },
 
-    /**
-     * Used by MapPresenter to initialize the map view. This function clears
-     * all layers from the map and then adds supplied layers in order.
-     *
-     * @param  {Array} layers Array of layer objects
-     */
-    initLayers: function(layers) {
-      this.map.overlayMapTypes.clear();
-      _.map(layers, this.addLayer, this);
+    toggleLayer: function(layerName) {
+      if (layerName === 'forestChange') {
+        if (this.isLayerRendered(layerName)) {
+          this.removeLayer(layerName);
+        } else {
+          this.addLayer(this.forestChangeLayer);
+        }
+      }
+
+      if (layerName === 'forestType') {
+        if (this.isLayerRendered(layerName)) {
+          this.removeLayer(layerName);
+        } else {
+          this.addLayer(this.forestTypeLayer);
+        }
+      }
     },
 
-    /**
-     * Used by MapPresenter to remove a layer by name.
-     *
-     * @param  {string} name The name of the layer to remove
-     */
-    removeLayer: function(name) {
-      var overlays_length = this.map.overlayMapTypes.getLength();
-      if (overlays_length > 0) {
-        for (var i = 0; i< overlays_length; i++) {
+    addLayer: function(layer){
+      this.map.overlayMapTypes.insertAt(0, layer);
+    },
+
+    isLayerRendered: function(layerName) {
+      var overlaysLength = this.map.overlayMapTypes.getLength();
+      if (overlaysLength > 0) {
+        for (var i = 0; i< overlaysLength; i++) {
           var layer = this.map.overlayMapTypes.getAt(i);
-          if (layer && layer.name === name) {
+          if (layer && layer.name === layerName) {
+            return true;
+          }
+        }
+      }
+    },
+
+    removeLayer: function(layerName) {
+      var overlaysLength = this.map.overlayMapTypes.getLength();
+      if (overlaysLength > 0) {
+        for (var i = 0; i< overlaysLength; i++) {
+          var layer = this.map.overlayMapTypes.getAt(i);
+          if (layer && layer.name === layerName) {
             this.map.overlayMapTypes.removeAt(i);
           }
         }
       }
     },
 
-    /**
-     * Used by MapPresenter to add a layer to the map.
-     *
-     * @param {Object} layer The layer object
-     */
-    addLayer: function(layer) {
-      var layerView = null;
-
-      if (layer.slug === 'loss') {
-        if (!_.has(this.layerViews, 'loss')) {
-          layerView = new UMDLossLayerView(layer);
-          this.layerViews.loss = layerView;
-        }
-      }
-      this.map.overlayMapTypes.insertAt(0, layerView);
-    },
-
-    /**
-     * Resizes the map.
-     */
     resize: function() {
       google.maps.event.trigger(this.map, 'resize');
       this.map.setZoom(this.map.getZoom());

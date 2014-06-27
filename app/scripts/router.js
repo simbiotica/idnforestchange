@@ -11,7 +11,9 @@ define([
   'backbone',
   'gmap',
   'views/MapView',
-], function($, _, Backbone, gmap, MapView) {
+  'views/FilterNavView',
+  'views/LayersNavView'
+], function($, _, Backbone, gmap, MapView, FilterNavView, LayersNavView) {
 
   'use strict';
 
@@ -25,6 +27,8 @@ define([
       gmap.init(_.bind(function() {
         if (!this.mapView) {
           this.mapView = new MapView();
+          this.filterNavView = new FilterNavView();
+          this.layersNavView = new LayersNavView();
         }
       }, this));
     }
