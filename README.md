@@ -18,19 +18,9 @@ Install globally dependencies:
     bower install
 
 ## To run
-
-On development
-    
     grunt [watch]
+    cd app/
+    python -m SimpleHTTPServer
 
-On production
-    
-    grunt build    
-
-# Deploy
-
-    bundle exec cap [staging|production] deploy
-
-# gh-pages
-
-    grunt gh-pages
+# Build
+    grunt build

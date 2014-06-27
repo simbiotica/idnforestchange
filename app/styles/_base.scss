@@ -1,106 +1,13 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   font-family: $site-font-family;
   font-size: $site-font-size;
+  color: $default-color;
   line-height: $site-line-height;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
-
-.main {
-  background: $secondary-color;
-  background-image: image-url("bg.png");
-  color: $thirth-color;
-}
-.report {
-  font-weight: 400;
-  color: $secondary-color;
-  font-size: 15px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-h1 {
-  font-size: $site-font-size + 7;
-}
-
-h2 {
-  font-size: $site-font-size + 14;
-}
-
-h3 {
-  font-size: $site-font-size + 2;
-}
-
-a {
-  color: $thirth-color;
-  text-decoration: none;
-}
-
-p {
-  line-height: 18px;
-  a {
-    color: $primary-color;
-  }
-}
-
-a, button, input, select, textarea {
-  &:focus {
-    outline: none;
-  }
-}
-
-.title {
-  font-size: $site-font-size + 23;
-  font-weight: bold;
-}
-.subtitle {
-  font-size: $site-font-size + 8;
-  font-weight: normal;
-  span { font-weight: 700;}
-}
-.target-title {
-  font-size: $site-font-size + 8;
-  line-height: 1.5em
-}
-input, button {
-  font-family: $site-font-family;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-dl {
-  -webkit-column-count: 2;
-  column-count: 2;
-
-  .is-clearfix {
-    margin: 0 0 15px 0;
-    -webkit-column-break-inside: avoid;
-    -moz-column-break-inside: avoid;
-    -o-column-break-inside: avoid;
-    -ms-column-break-inside: avoid;
-    column-break-inside: avoid;
-  }
-}
-
-dt, dd {
-  display: inline;
-}
-
-dt {
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: 15px;
-  &:after {
-    content: ": ";
-  }
-}
-
-dd {
-  margin: 0;
-}
-
-
-
-

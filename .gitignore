@@ -2,8 +2,8 @@
 *.log
 .DS_Store
 .sass-cache
-.tmp
 .grunt
 node_modules
+app/.tmp
 app/vendor
 dist

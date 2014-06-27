@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 
     root: {
       app: 'app',
-      tmp: '.tmp',
+      tmp: 'app/.tmp',
       test: 'test',
       dist: 'dist'
     },

@@ -1,7 +1,8 @@
 @import
+  "compass/reset",
   "compass/css3",
-
   "settings",
   "base",
   "mixins",
-  "states";
+  "states",
+  "modules/_map";

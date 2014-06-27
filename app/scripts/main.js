@@ -6,6 +6,8 @@ require.config({
     jquery: '../vendor/jquery/dist/jquery',
     underscore: '../vendor/underscore/underscore',
     backbone: '../vendor/backbone/backbone',
+    class: '../vendor/Class.js/Class',
+    gmap: 'gmap',
     text: '../vendor/requirejs-text/text',
   },
 
@@ -20,11 +22,26 @@ require.config({
       deps: ['jquery', 'underscore'],
       exports: 'Backbone'
     },
+    class: {
+      exports: 'Class'
+    }
   }
 
 });
 
+/**
+ * Application entry point.
+ */
 require([
-], function() {
-  // init state application
+  'backbone',
+  'utils'
+], function(gmap, MapView) {
+
+  require(['router'],
+    function(router) {
+      if (!Backbone.History.started) {
+        Backbone.history.start({pushState: true});
+      }
+    });
+
 });
