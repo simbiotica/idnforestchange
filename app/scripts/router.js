@@ -20,7 +20,7 @@ define([
   var Router = Backbone.Router.extend({
 
     routes: {
-      '': 'map'
+      '*path': 'map'
     },
 
     map: function() {

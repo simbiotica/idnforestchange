@@ -14,7 +14,7 @@ define([
       this.urlTemplate = 'http://earthengine.google.org/static/hansen_2013/gfw_loss_year/%z/%x/%y.png';
     },
 
-    filterCanvasImage: function(imgdata, w, h, z) {
+    filterTileImgdata: function(imgdata, w, h, z) {
     }
 
   });
