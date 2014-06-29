@@ -10,7 +10,8 @@ define([
     init: function () {
       _.bindAll(this, 'filterTileImgdata');
       this.tileSize = new google.maps.Size(256, 256);
-      this.tiles = {};
+      this.tiles = [];
+      this.tilesKeys = {};
       this.params = {};
     },
 
@@ -27,20 +28,24 @@ define([
     getTile: function(coord, zoom, ownerDocument) {
       /**
        * Testing cache.
+       * Doesnt keep all the tiles anymore, this is great
+       * for performance.
        * Doesnt process or request the tile again if it's 
        * already loaded.
        * It has an allocated maximum number of tiles stored.
-       * 1000 in this case. This is key to keep the memory low.
+       * 1000 in this case.
        */
       var tileId = this._getTileId(coord.x, coord.y, zoom);
 
-      while (Object.keys(this.tiles).length > 1000) {
-        delete this.tiles[Object.keys(this.tiles)[0]];
+      if (this.tiles.length > 500) {
+        for (var i = 0; i < this.tiles.length - 500; i++) {
+          this.tiles[i] = null;
+        };
       }
 
-      console.log(Object.keys(this.tiles).length);
-      if (typeof this.tiles[tileId] !== 'undefined') {
-        return this.tiles[tileId].canvas;
+      var cachedTile = this.tiles[this.tilesKeys[tileId]];
+      if (cachedTile) {
+        return cachedTile.canvas;
       }
       ///
 
@@ -149,12 +154,8 @@ define([
     _cacheTile: function(canvasData) {
       var tileId = this._getTileId(canvasData.x, canvasData.y, canvasData.z)
       canvasData.canvas.setAttribute('id', tileId);
-
-      if (typeof this.tiles[tileId] !== 'undefined') {
-        delete this.tiles[tileId];
-      }
-
-      this.tiles[tileId] = canvasData;
+      this.tilesKeys[tileId] = this.tiles.length;
+      this.tiles.push(canvasData);
     },
 
     _getTileId: function(x, y, z) {
