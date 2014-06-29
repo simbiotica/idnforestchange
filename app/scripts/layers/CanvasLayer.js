@@ -25,6 +25,25 @@ define([
      * @return {canvas}  canvas        tile canvas
      */
     getTile: function(coord, zoom, ownerDocument) {
+      /**
+       * Testing cache.
+       * Doesnt process or request the tile again if it's 
+       * already loaded.
+       * It has an allocated maximum number of tiles stored.
+       * 1000 in this case. This is key to keep the memory low.
+       */
+      var tileId = this._getTileId(coord.x, coord.y, zoom);
+
+      while (Object.keys(this.tiles).length > 1000) {
+        delete this.tiles[Object.keys(this.tiles)[0]];
+      }
+
+      console.log(Object.keys(this.tiles).length);
+      if (typeof this.tiles[tileId] !== 'undefined') {
+        return this.tiles[tileId].canvas;
+      }
+      ///
+
       var canvas = ownerDocument.createElement('canvas');
       canvas.style.border = 'none';
       canvas.style.margin = '0';
@@ -128,7 +147,7 @@ define([
     },
 
     _cacheTile: function(canvasData) {
-      var tileId = canvasData.x + '_' + canvasData.y + '_' + canvasData.z;
+      var tileId = this._getTileId(canvasData.x, canvasData.y, canvasData.z)
       canvasData.canvas.setAttribute('id', tileId);
 
       if (typeof this.tiles[tileId] !== 'undefined') {
@@ -136,6 +155,10 @@ define([
       }
 
       this.tiles[tileId] = canvasData;
+    },
+
+    _getTileId: function(x, y, z) {
+      return x + '_' + y + '_' + z;
     },
 
     setParams: function(params) {
