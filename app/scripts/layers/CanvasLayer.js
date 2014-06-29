@@ -27,21 +27,17 @@ define([
     getTile: function(coord, zoom, ownerDocument) {
       /**
        * Testing cache.
-       * Doesnt keep all the tiles anymore, this is great
-       * for performance.
-       * Doesnt process or request the tile again if it's 
-       * already loaded.
-       * It has an allocated maximum number of tiles stored.
-       * 100 in this case.
+       * Doesnt keep all the tiles anymore, just the ones
+       * on the current zoom.
        */
       var tileId = this._getTileId(coord.x, coord.y, zoom);
       var objKeys = Object.keys(this.tiles);
 
-      if (objKeys.length > 100) {
-        if (this.tiles[objKeys[0]].z !== zoom) {
-          delete this.tiles[objKeys[0]];
+      for (var i = 0; i < objKeys.length; i++) {
+        if (this.tiles[objKeys[i]].z !== zoom) {
+          delete this.tiles[objKeys[i]];
         }
-      }
+      };
 
       if (this.tiles[tileId]) {
         return this.tiles[tileId].canvas;
