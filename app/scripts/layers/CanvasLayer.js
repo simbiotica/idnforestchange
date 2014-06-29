@@ -10,8 +10,7 @@ define([
     init: function () {
       _.bindAll(this, 'filterTileImgdata');
       this.tileSize = new google.maps.Size(256, 256);
-      this.tiles = [];
-      this.tilesKeys = {};
+      this.tiles = {};
       this.params = {};
     },
 
@@ -33,19 +32,19 @@ define([
        * Doesnt process or request the tile again if it's 
        * already loaded.
        * It has an allocated maximum number of tiles stored.
-       * 1000 in this case.
+       * 100 in this case.
        */
       var tileId = this._getTileId(coord.x, coord.y, zoom);
+      var objKeys = Object.keys(this.tiles);
 
-      if (this.tiles.length > 500) {
-        for (var i = 0; i < this.tiles.length - 500; i++) {
-          this.tiles[i] = null;
-        };
+      if (objKeys.length > 100) {
+        if (this.tiles[objKeys[0]].z !== zoom) {
+          delete this.tiles[objKeys[0]];
+        }
       }
 
-      var cachedTile = this.tiles[this.tilesKeys[tileId]];
-      if (cachedTile) {
-        return cachedTile.canvas;
+      if (this.tiles[tileId]) {
+        return this.tiles[tileId].canvas;
       }
       ///
 
@@ -154,8 +153,7 @@ define([
     _cacheTile: function(canvasData) {
       var tileId = this._getTileId(canvasData.x, canvasData.y, canvasData.z)
       canvasData.canvas.setAttribute('id', tileId);
-      this.tilesKeys[tileId] = this.tiles.length;
-      this.tiles.push(canvasData);
+      this.tiles[tileId] = canvasData;
     },
 
     _getTileId: function(x, y, z) {
