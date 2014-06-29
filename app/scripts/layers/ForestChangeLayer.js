@@ -79,7 +79,13 @@ define([
             imgdata[pixelPos] = band*10+100;
             imgdata[pixelPos + 1] = 255;
             imgdata[pixelPos + 2] = 0;
-            imgdata[pixelPos + 3] = 0;
+            imgdata[pixelPos + 3] = 205;
+          } else if (band%3===0 && band>0) {
+            //console.log(band);
+            imgdata[pixelPos] = 0;
+            imgdata[pixelPos + 1] = 0;
+            imgdata[pixelPos + 2] = band*10+100;
+            imgdata[pixelPos + 3] = 205;
           } else {
             imgdata[pixelPos + 3] = 0;
           }
