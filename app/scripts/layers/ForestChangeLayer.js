@@ -20,7 +20,6 @@ define([
     filterTileImgdata: function(imgdata, w, h, z) {
       var components = 4;
 
-
       for(var i = 0; i < w; ++i) {
         for(var j = 0; j < h; ++j) {
           var pixelPos = (j * w + i) * components;
