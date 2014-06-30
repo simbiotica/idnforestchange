@@ -35,7 +35,7 @@ define([
         }
         // Initialize forestChange layer
         mps.publish('map/toggle-layer', ['forestChange']);
-        mps.publish('filter/change', [{2005: true}]);
+        mps.publish('filter/change', [{2000: true}]);
       }, this));
     }
   });

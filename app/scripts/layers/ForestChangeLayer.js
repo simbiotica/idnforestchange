@@ -31,8 +31,27 @@ define([
           //   imgdata[pixelPos + 2] = 0;
           //   imgdata[pixelPos + 3] = 100;
           // }
+          //console.log(this.params)
+          if (this.params['2000']) {
+            if(band===1 || band===10 ||  band===11 || band===12 ){
+                //degraded
+                imgdata[pixelPos] = 0;
+                imgdata[pixelPos + 1]  = 155;
+                imgdata[pixelPos + 2] = 0;
+                imgdata[pixelPos + 3] = 100;
+            }else if(band===2 || band===4 || band===5 || band===6 || band===7 || band===8 || band===9 || band>12){
+                //intact
+                imgdata[pixelPos] = 30;
+                imgdata[pixelPos + 1]  = 90;
+                imgdata[pixelPos + 2] = 60;
+                imgdata[pixelPos + 3] = 100;
 
-          if (this.params['2005']) {
+            }else{
+              imgdata[pixelPos + 3] = 0;
+            }
+
+
+          }else if (this.params['2005']) {
             if(band===1 || band===7 ||  band===11 || band===12 || band===13 || band===14){
                 //degraded
                 imgdata[pixelPos] = 0;
