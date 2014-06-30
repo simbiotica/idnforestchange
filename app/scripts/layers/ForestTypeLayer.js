@@ -20,7 +20,7 @@ define([
     filterTileImgdata: function(imgdata, w, h, z) {
       var components = 4; //rgba
       var pixel_pos;
-      var zoom = 3;
+      var zoom = 6;
     //---> power scale
     //var exp=config.compression;
     var exp=zoom<11?0.3+((zoom-3)/20):1;
@@ -40,9 +40,11 @@ define([
           imgdata[pixel_pos + 1] = 102;
           imgdata[pixel_pos + 2] = 153;
           if (zoom < 13) {
-            imgdata[pixel_pos+ 3] = intensity < 10 ? 0: (12/zoom)*255*c/3;
+            //imgdata[pixel_pos+ 3] = intensity < 10 ? 0: (12/zoom)*255*c/3;
+            imgdata[pixel_pos+ 3] = myscale(intensity);
           } else {
-            imgdata[pixel_pos+ 3] = intensity < 10 ? 0: 255*c/3;
+            //imgdata[pixel_pos+ 3] = intensity < 10 ? 0: 255*c/3;
+            imgdata[pixel_pos+ 3] = intensity ;
           }
 
 
