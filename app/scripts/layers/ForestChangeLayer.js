@@ -19,11 +19,22 @@ define([
     // use this.params here to filter...
     filterTileImgdata: function(imgdata, w, h, z) {
       var components = 4;
+      var year=2000;
+      if (this.params['2000']) {
+        year=2000;
+      }else  if (this.params['2005']) {
+        year=2005;
+      }else  if (this.params['2010']) {
+        year=2010;
+      }else  if (this.params['2012']) {
+        year=2012;
+      }            
 
       for(var i = 0; i < w; ++i) {
         for(var j = 0; j < h; ++j) {
           var pixelPos = (j * w + i) * components;
           var band = imgdata[pixelPos];
+
 
           // if (band>0 && band<16) {
           //   imgdata[pixelPos] = 0;
@@ -32,65 +43,66 @@ define([
           //   imgdata[pixelPos + 3] = 100;
           // }
           //console.log(this.params)
-          if (this.params['2000']) {
-            if(band===1 || band===10 ||  band===11 || band===12 ){
+          switch (year){
+              case 2000:
+              if(band===1 || band===10 ||  band===11 || band===12 ){
+                  //degraded
+                  imgdata[pixelPos] = 0;
+                  imgdata[pixelPos + 1]  = 155;
+                  imgdata[pixelPos + 2] = 0;
+                  imgdata[pixelPos + 3] = 100;
+              }else if(band===2 || band===4 || band===5 || band===6 || band===7 || band===8 || band===9 || band>12){
+                  //intact
+                  imgdata[pixelPos] = 30;
+                  imgdata[pixelPos + 1]  = 90;
+                  imgdata[pixelPos + 2] = 60;
+                  imgdata[pixelPos + 3] = 100;
+
+              }else{
+                imgdata[pixelPos + 3] = 0;
+              }
+              break;
+
+              case 2005:
+              if(band===1 || band===7 ||  band===11 || band===12 || band===13 || band===14){
                 //degraded
                 imgdata[pixelPos] = 0;
                 imgdata[pixelPos + 1]  = 155;
                 imgdata[pixelPos + 2] = 0;
                 imgdata[pixelPos + 3] = 100;
-            }else if(band===2 || band===4 || band===5 || band===6 || band===7 || band===8 || band===9 || band>12){
-                //intact
-                imgdata[pixelPos] = 30;
-                imgdata[pixelPos + 1]  = 90;
-                imgdata[pixelPos + 2] = 60;
-                imgdata[pixelPos + 3] = 100;
+              }else if(band===2 || band===5|| band===6 || band===8 || band===9 || band===15){
+                  //intact
+                  imgdata[pixelPos] = 30;
+                  imgdata[pixelPos + 1]  = 90;
+                  imgdata[pixelPos + 2] = 60;
+                  imgdata[pixelPos + 3] = 100;
 
-            }else{
-              imgdata[pixelPos + 3] = 0;
-            }
+              }else{
+                imgdata[pixelPos + 3] = 0;
+              }
+              break;
 
-
-          }else if (this.params['2005']) {
-            if(band===1 || band===7 ||  band===11 || band===12 || band===13 || band===14){
+              case 2010:
+              if(band===1 || band===8 || band===12 || band===14 || band===15){
                 //degraded
                 imgdata[pixelPos] = 0;
                 imgdata[pixelPos + 1]  = 155;
                 imgdata[pixelPos + 2] = 0;
                 imgdata[pixelPos + 3] = 100;
-            }else if(band===2 || band===5|| band===6 || band===8 || band===9 || band===15){
-                //intact
-                imgdata[pixelPos] = 30;
-                imgdata[pixelPos + 1]  = 90;
-                imgdata[pixelPos + 2] = 60;
-                imgdata[pixelPos + 3] = 100;
+                }else if(band===2 || band===6 || band===9 ){
+                    //intact
+                    imgdata[pixelPos] = 30;
+                    imgdata[pixelPos + 1]  = 90;
+                    imgdata[pixelPos + 2] = 60;
+                    imgdata[pixelPos + 3] = 100;
 
-            }else{
-              imgdata[pixelPos + 3] = 0;
-            }
+                }else{
+                  imgdata[pixelPos + 3] = 0;
+                }
 
-
-          }else if (this.params['2010']) {
-            if(band===1 || band===8 || band===12 || band===14 || band===15){
-                //degraded
-                imgdata[pixelPos] = 0;
-                imgdata[pixelPos + 1]  = 155;
-                imgdata[pixelPos + 2] = 0;
-                imgdata[pixelPos + 3] = 100;
-            }else if(band===2 || band===6 || band===9 ){
-                //intact
-                imgdata[pixelPos] = 30;
-                imgdata[pixelPos + 1]  = 90;
-                imgdata[pixelPos + 2] = 60;
-                imgdata[pixelPos + 3] = 100;
-
-            }else{
-              imgdata[pixelPos + 3] = 0;
-            }
-
-
-          }else if (this.params['2012']) {
-            if(band===1 || band===9 ){
+              break;
+              case 2012:
+              if(band===1 || band===9 ){
                 //degraded
                 imgdata[pixelPos] = 0;
                 imgdata[pixelPos + 1]  = 155;
@@ -106,11 +118,99 @@ define([
             }else{
               imgdata[pixelPos + 3] = 0;
             }
+            break;
 
 
-          }else{
-              imgdata[pixelPos + 3] = 0;
-            }
+
+
+          }
+
+
+
+
+
+          // imgdata[pixelPos + 3] = 0;
+          // if (this.params['2000']) {
+          //   if(band===1 || band===10 ||  band===11 || band===12 ){
+          //       //degraded
+          //       imgdata[pixelPos] = 0;
+          //       imgdata[pixelPos + 1]  = 155;
+          //       imgdata[pixelPos + 2] = 0;
+          //       imgdata[pixelPos + 3] = 100;
+          //   }else if(band===2 || band===4 || band===5 || band===6 || band===7 || band===8 || band===9 || band>12){
+          //       //intact
+          //       imgdata[pixelPos] = 30;
+          //       imgdata[pixelPos + 1]  = 90;
+          //       imgdata[pixelPos + 2] = 60;
+          //       imgdata[pixelPos + 3] = 100;
+
+          //   }else{
+          //     imgdata[pixelPos + 3] = 0;
+          //   }
+
+
+          // }else if (this.params['2005']) {
+          //   if(band===1 || band===7 ||  band===11 || band===12 || band===13 || band===14){
+          //       //degraded
+          //       imgdata[pixelPos] = 0;
+          //       imgdata[pixelPos + 1]  = 155;
+          //       imgdata[pixelPos + 2] = 0;
+          //       imgdata[pixelPos + 3] = 100;
+          //   }else if(band===2 || band===5|| band===6 || band===8 || band===9 || band===15){
+          //       //intact
+          //       imgdata[pixelPos] = 30;
+          //       imgdata[pixelPos + 1]  = 90;
+          //       imgdata[pixelPos + 2] = 60;
+          //       imgdata[pixelPos + 3] = 100;
+
+          //   }else{
+          //     imgdata[pixelPos + 3] = 0;
+          //   }
+            
+
+
+          // }else if (this.params['2010']) {
+          //   if(band===1 || band===8 || band===12 || band===14 || band===15){
+          //       //degraded
+          //       imgdata[pixelPos] = 0;
+          //       imgdata[pixelPos + 1]  = 155;
+          //       imgdata[pixelPos + 2] = 0;
+          //       imgdata[pixelPos + 3] = 100;
+          //   }else if(band===2 || band===6 || band===9 ){
+          //       //intact
+          //       imgdata[pixelPos] = 30;
+          //       imgdata[pixelPos + 1]  = 90;
+          //       imgdata[pixelPos + 2] = 60;
+          //       imgdata[pixelPos + 3] = 100;
+
+          //   }else{
+          //     imgdata[pixelPos + 3] = 0;
+          //   }
+
+
+          // }else if (this.params['2012']) {
+          //   if(band===1 || band===9 ){
+          //       //degraded
+          //       imgdata[pixelPos] = 0;
+          //       imgdata[pixelPos + 1]  = 155;
+          //       imgdata[pixelPos + 2] = 0;
+          //       imgdata[pixelPos + 3] = 100;
+          //   }else if(band===2 ){
+          //       //intact
+          //       imgdata[pixelPos] = 30;
+          //       imgdata[pixelPos + 1]  = 90;
+          //       imgdata[pixelPos + 2] = 60;
+          //       imgdata[pixelPos + 3] = 100;
+
+          //   }else{
+          //     imgdata[pixelPos + 3] = 0;
+          //   }
+
+
+
+          // }else{
+          //     imgdata[pixelPos + 3] = 0;
+          //   }
 
 
 
