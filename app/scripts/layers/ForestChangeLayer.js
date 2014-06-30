@@ -34,14 +34,14 @@ define([
           var pixelPos = (j * w + i) * components;
           var band = imgdata[pixelPos];
 
-          if (band>0 && band<16) {
-            imgdata[pixelPos] = 0;
-            imgdata[pixelPos + 1]  = 55;
-            imgdata[pixelPos + 2] = 0;
-            imgdata[pixelPos + 3] = 100;
-          }
+          // if (band>0 && band<16) {
+          //   imgdata[pixelPos] = 0;
+          //   imgdata[pixelPos + 1]  = 55;
+          //   imgdata[pixelPos + 2] = 0;
+          //   imgdata[pixelPos + 3] = 100;
+          // }
 
-          if (band>0 && band<4) {
+          if (band>0 && band<3) {
             //console.log(band);
             imgdata[pixelPos] = 0;
             //imgdata[pixelPos + 1] = band*10+200;
@@ -52,9 +52,9 @@ define([
               case 2:
                 imgdata[pixelPos + 1]  = 255;
                 break;
-              case 3:
-                imgdata[pixelPos + 1]  = 55;
-                break;
+              // case 3:
+              //   imgdata[pixelPos + 1]  = 55;
+              //   break;
             }
             imgdata[pixelPos + 2] = 0;
             imgdata[pixelPos + 3] = 100;
@@ -80,7 +80,7 @@ define([
             imgdata[pixelPos + 1] = 255;
             imgdata[pixelPos + 2] = 0;
             imgdata[pixelPos + 3] = 205;
-          } else if (band%3===0 && band>0) {
+          } else if (band%3===0 && band>3) {
             //console.log(band);
             imgdata[pixelPos] = 0;
             imgdata[pixelPos + 1] = 0;
