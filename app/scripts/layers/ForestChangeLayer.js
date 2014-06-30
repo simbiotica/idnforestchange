@@ -31,6 +31,7 @@ define([
           //   imgdata[pixelPos + 2] = 0;
           //   imgdata[pixelPos + 3] = 100;
           // }
+          
 
           if (band>0 && band<3) {
             //console.log(band);
