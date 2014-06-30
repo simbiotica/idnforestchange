@@ -32,7 +32,7 @@ define([
           //   imgdata[pixelPos + 3] = 100;
           // }
 
-          if (band>0 && band<3) {
+           if (band>0 && band<3) {
             //console.log(band);
             imgdata[pixelPos] = 0;
             //imgdata[pixelPos + 1] = band*10+200;
@@ -49,38 +49,58 @@ define([
             }
             imgdata[pixelPos + 2] = 0;
             imgdata[pixelPos + 3] = 100;
-          } else if (band%3===1 && band<13) {
+          } else if (band%3===1 && band<13 && this.params['2005']) {
             switch (band){
               case 4:
                 imgdata[pixelPos] = 255;
                 break;
               case 7:
-                imgdata[pixelPos] = 155;
+                imgdata[pixelPos] = 95;
                 break;
               case 10:
-                imgdata[pixelPos] = 255;
+                imgdata[pixelPos] = 155;
                 break;
             }
             //imgdata[pixelPos] = band*255;
             imgdata[pixelPos + 1] = 0;
             imgdata[pixelPos + 2] = 0;
             imgdata[pixelPos + 3] = 205;
-          } else if (band%3===2) {
-            //console.log(band);
-            imgdata[pixelPos] = band*10+100;
-            imgdata[pixelPos + 1] = 255;
+          } else if (band%3===2 && band<13 && this.params['2010']) {
+            switch (band){
+              case 5:
+                imgdata[pixelPos] = 255;
+                break;
+              case 8:
+                imgdata[pixelPos] = 95;
+                break;
+              case 11:
+                imgdata[pixelPos] = 155;
+                break;
+            }
+            //imgdata[pixelPos] = band*255;
+            imgdata[pixelPos + 1] = 0;
             imgdata[pixelPos + 2] = 0;
             imgdata[pixelPos + 3] = 205;
-          } else if (band%3===0 && band>3) {
-            //console.log(band);
-            imgdata[pixelPos] = 0;
+          } else if (band%3===0 && band>3 && band<13 && this.params['2012']) {
+            switch (band){
+              case 6:
+                imgdata[pixelPos] = 255;
+                break;
+              case 9:
+                imgdata[pixelPos] = 95;
+                break;
+              case 12:
+                imgdata[pixelPos] = 155;
+                break;
+            }
+            //imgdata[pixelPos] = band*255;
             imgdata[pixelPos + 1] = 0;
-            imgdata[pixelPos + 2] = band*10+100;
+            imgdata[pixelPos + 2] = 0;
             imgdata[pixelPos + 3] = 205;
-
           } else {
             imgdata[pixelPos + 3] = 0;
           }
+
         }
       }
     }
