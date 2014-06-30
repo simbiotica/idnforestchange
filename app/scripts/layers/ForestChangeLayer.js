@@ -32,7 +32,7 @@ define([
           //   imgdata[pixelPos + 3] = 100;
           // }
 
-           if (band>0 && band<3) {
+          if (band>0 && band<3) {
             //console.log(band);
             imgdata[pixelPos] = 0;
             //imgdata[pixelPos + 1] = band*10+200;

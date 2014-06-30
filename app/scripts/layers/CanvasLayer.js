@@ -21,7 +21,7 @@ define([
      * @param  {obj}     coord         coordenades {x ,y}
      * @param  {integer} zoom          current map zoom
      * @param  {object}  ownerDocument
-     * 
+     *
      * @return {canvas}  canvas        tile canvas
      */
     getTile: function(coord, zoom, ownerDocument) {
@@ -37,7 +37,7 @@ define([
         if (this.tiles[objKeys[i]].z !== zoom) {
           delete this.tiles[objKeys[i]];
         }
-      };
+      }
 
       if (this.tiles[tileId]) {
         return this.tiles[tileId].canvas;
@@ -147,7 +147,7 @@ define([
     },
 
     _cacheTile: function(canvasData) {
-      var tileId = this._getTileId(canvasData.x, canvasData.y, canvasData.z)
+      var tileId = this._getTileId(canvasData.x, canvasData.y, canvasData.z);
       canvasData.canvas.setAttribute('id', tileId);
       this.tiles[tileId] = canvasData;
     },

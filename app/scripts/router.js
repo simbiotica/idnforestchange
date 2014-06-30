@@ -10,10 +10,12 @@ define([
   'underscore',
   'backbone',
   'gmap',
+  'mps',
   'views/MapView',
   'views/FilterNavView',
-  'views/LayersNavView'
-], function($, _, Backbone, gmap, MapView, FilterNavView, LayersNavView) {
+  'views/LayersNavView',
+  'views/LegendView'
+], function($, _, Backbone, gmap, mps, MapView, FilterNavView, LayersNavView, LegendView) {
 
   'use strict';
 
@@ -29,7 +31,10 @@ define([
           this.mapView = new MapView();
           this.filterNavView = new FilterNavView();
           this.layersNavView = new LayersNavView();
+          this.legendView = new LegendView();
         }
+        // Initialize forestChange layer
+        mps.publish('map/toggle-layer', ['forestChange']);
       }, this));
     }
   });

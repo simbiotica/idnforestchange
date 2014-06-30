@@ -1,0 +1,67 @@
+$forest-change-color: #F69;
+
+$forest-change-cleared-color: rgb(0,255,10);
+$forest-change-degraded-color: #6d6de5;
+
+$forest-change-primary-intact-color: #F69;
+$forest-change-primary-degraded-color: red;
+
+.legends {
+  top: 80px;
+  right: 40px;
+  padding: 20px;
+  width: 250px;
+
+  .legend-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .category {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 10px;
+  }
+
+  .category-title {
+  }
+
+  .category-items {
+    margin-top: 6px;
+    padding-left: 10px;
+
+    > li {
+      margin-bottom: 4px;
+
+      &:before {
+        content: ' \25CF';
+        font-size: 16px;
+        vertical-align: bottom;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  .no-layer-selected {
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  .primary-forest li.intact {
+    color: $forest-change-primary-intact-color;
+  }
+
+  .primary-forest li.degraded {
+    color: $forest-change-primary-degraded-color;
+  }
+
+  .forest-change li.cleared {
+    color: $forest-change-cleared-color;
+  }
+
+  .forest-change li.degraded {
+    color: $forest-change-degraded-color;
+  }
+}

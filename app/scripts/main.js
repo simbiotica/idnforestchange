@@ -6,6 +6,7 @@ require.config({
     jquery: '../vendor/jquery/dist/jquery',
     underscore: '../vendor/underscore/underscore',
     backbone: '../vendor/backbone/backbone',
+    handlebars: '../vendor/handlebars/handlebars',
     Class: '../vendor/Class.js/Class',
     gmap: 'gmap',
     text: '../vendor/requirejs-text/text',
@@ -25,6 +26,9 @@ require.config({
     },
     Class: {
       exports: 'Class'
+    },
+    handlebars: {
+      exports: 'Handlebars'
     }
   }
 

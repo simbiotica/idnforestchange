@@ -1,17 +1,29 @@
 define([
   'backbone',
   'underscore',
-  'mps'
-], function(Backbone, _, mps) {
+  'handlebars',
+  'mps',
+  'text!../../templates/widget-filter-nav.handlebars'
+], function(Backbone, _, Handlebars, mps, tpl) {
 
   'use strict';
 
   var FilterNavView = Backbone.View.extend({
 
-    el: '.filter-nav',
+    className: 'widget filter-nav',
+    template: Handlebars.compile(tpl),
 
     events: {
       'change input': '_publish'
+    },
+
+    initialize: function() {
+      this.render();
+    },
+
+    render: function() {
+      this.$el.html(this.template());
+      $('.widgets').append(this.el);
     },
 
     _publish: function() {

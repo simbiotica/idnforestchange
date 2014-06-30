@@ -31,10 +31,10 @@ define([
 
       this.map = new google.maps.Map(this.el, options);
       this._resize();
-      this._addListeners();
+      this._subscribe();
     },
 
-    _addListeners: function(argument) {
+    _subscribe: function(argument) {
       mps.subscribe('map/toggle-layer', this._toggleLayer);
 
       mps.subscribe('filter/change', _.bind(function(params) {
