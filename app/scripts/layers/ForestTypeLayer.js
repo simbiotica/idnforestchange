@@ -1,7 +1,8 @@
 
 define([
+  'underscore',
   'layers/CanvasLayer'
-], function(CanvasLayer) {
+], function(_, CanvasLayer) {
 
   'use strict';
 
@@ -15,7 +16,7 @@ define([
       this.urlTemplate = 'https://s3.amazonaws.com/idn/idnft/%z/%x/%y.png';
     },
 
-    filterCanvasImage: function(imgdata, w, h, z) {
+    filterTileImgdata: function(imgdata, w, h, z) {
     }
 
   });

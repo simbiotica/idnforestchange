@@ -35,13 +35,9 @@ require.config({
  */
 require([
   'backbone',
-], function(Backbone) {
-
-  require(['router'],
-    function(router) {
-      if (!Backbone.History.started) {
-        Backbone.history.start({pushState: true});
-      }
-    });
-
+  'router'
+], function(Backbone, router) {
+  if (!Backbone.History.started) {
+    Backbone.history.start({pushState: true});
+  }
 });
