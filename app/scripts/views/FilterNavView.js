@@ -33,7 +33,7 @@ define([
     _getParams: function() {
       var params = {};
 
-      this.$el.find('input:checkbox:checked')
+      this.$el.find('input:radio:checked')
         .map(function() {
           params[this.value] = true;
         });
