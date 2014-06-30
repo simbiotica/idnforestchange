@@ -11,15 +11,15 @@ define([
     el: '.layers-nav',
 
     events: {
-      'click li': 'toggleLayer'
+      'click li': '_toggleLayer'
     },
 
-    toggleLayer: function(event) {
+    _toggleLayer: function(event) {
       var $currentTarget = $(event.currentTarget);
       var layerName = $currentTarget.data('layer');
-      $currentTarget.toggleClass('selected');
-
+      
       if (layerName) {
+        $currentTarget.toggleClass('selected');
         mps.publish('map/toggle-layer', [layerName]);
       }
     }

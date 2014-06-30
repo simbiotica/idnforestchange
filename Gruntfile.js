@@ -74,9 +74,6 @@ module.exports = function(grunt) {
       dist: {
         files: {
           '<%= root.dist %>/styles/main.css': [
-            '<%= root.app %>/vendor/normalize-css/normalize.css',
-            '<%= root.app %>/vendor/cartodb/themes/css/cartodb.css',
-            '<%= root.app %>/vendor/select2/select2.css',
             '<%= root.tmp %>/styles/{,*/}*.css'
           ]
         }
@@ -131,19 +128,7 @@ module.exports = function(grunt) {
           cwd: '<%= root.app %>/images',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
           dest: '<%= root.dist %>/images'
-        }, {
-          expand: true,
-          cwd: '<%= root.app %>/vendor/cartodb/themes/img',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= root.dist %>/img'
         }]
-      },
-      select2: {
-        files: {
-          '<%= root.dist %>/styles/select2-spinner.gif': '<%= root.app %>/vendor/select2/select2-spinner.gif',
-          '<%= root.dist %>/styles/select2.png': '<%= root.app %>/vendor/select2/select2.png',
-          '<%= root.dist %>/styles/select2x2.png': '<%= root.app %>/vendor/select2/select2x2.png',
-        }
       }
     },
 

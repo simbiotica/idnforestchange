@@ -11,19 +11,19 @@ define([
     el: '.filter-nav',
 
     events: {
-      'change input': 'publish'
+      'change input': '_publish'
     },
 
-    publish: function() {
-      mps.publish('filter/change', [this.getParams()]);
+    _publish: function() {
+      mps.publish('filter/change', [this._getParams()]);
     },
 
-    getParams: function() {
-      var params = [];
+    _getParams: function() {
+      var params = {};
 
       this.$el.find('input:checkbox:checked')
         .map(function() {
-          params.push(this.value);
+          params[this.value] = true;
         });
 
       return params;

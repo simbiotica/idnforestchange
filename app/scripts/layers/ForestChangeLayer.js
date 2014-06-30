@@ -2,8 +2,7 @@
 define([
   'underscore',
   'layers/CanvasLayer',
-  'mps'
-], function(_, CanvasLayer, mps) {
+], function(_, CanvasLayer) {
 
   'use strict';
 
@@ -15,22 +14,15 @@ define([
       this.name = 'forestChange';
       //this.urlTemplate = 'http://earthengine.google.org/static/hansen_2013/gfw_loss_year/%z/%x/%y.png';
       this.urlTemplate = 'https://s3.amazonaws.com/idn/idnfc2/%z/%x/%y.png';
-
-
-      mps.subscribe('filter/change', _.bind(function(params) {
-        this.params = params;
-        this.updateTiles();
-      }, this));
     },
 
     // use this.params here to filter...
-    filterCanvasImage: function(imgdata, w, h, z) {
+    filterTileImgdata: function(imgdata, w, h, z) {
       var components = 4;
 
 
       for(var i = 0; i < w; ++i) {
         for(var j = 0; j < h; ++j) {
-
           var pixelPos = (j * w + i) * components;
           var band = imgdata[pixelPos];
 
@@ -86,6 +78,7 @@ define([
             imgdata[pixelPos + 1] = 0;
             imgdata[pixelPos + 2] = band*10+100;
             imgdata[pixelPos + 3] = 205;
+
           } else {
             imgdata[pixelPos + 3] = 0;
           }

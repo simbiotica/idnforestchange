@@ -13,7 +13,7 @@ define([
     el: '.map',
 
     initialize: function() {
-      _.bindAll(this, 'toggleLayer', 'addLayer');
+      _.bindAll(this, '_toggleLayer', '_addLayer');
 
       this.forestChangeLayer = new ForestChangeLayer();
       this.forestTypeLayer = new ForestTypeLayer();
@@ -30,37 +30,50 @@ define([
       };
 
       this.map = new google.maps.Map(this.el, options);
-      this.resize();
-      this.addListeners();
+      this._resize();
+      this._addListeners();
     },
 
-    addListeners: function(argument) {
-      mps.subscribe('map/toggle-layer', this.toggleLayer);
+    _addListeners: function(argument) {
+      mps.subscribe('map/toggle-layer', this._toggleLayer);
+
+      mps.subscribe('filter/change', _.bind(function(params) {
+        this.forestChangeLayer.setParams(params);
+        this.forestTypeLayer.setParams(params);
+
+        if (this._isLayerRendered('forestChange')) {
+          this.forestChangeLayer.updateTiles();
+        }
+
+        if (this._isLayerRendered('forestType')) {
+          this.forestTypeLayer.updateTiles();
+        }
+      }, this));
     },
 
-    toggleLayer: function(layerName) {
+    _toggleLayer: function(layerName) {
       if (layerName === 'forestChange') {
-        if (this.isLayerRendered(layerName)) {
-          this.removeLayer(layerName);
+        if (this._isLayerRendered(layerName)) {
+          this._removeLayer(layerName);
         } else {
-          this.addLayer(this.forestChangeLayer);
+          this._addLayer(this.forestChangeLayer);
         }
       }
 
       if (layerName === 'forestType') {
-        if (this.isLayerRendered(layerName)) {
-          this.removeLayer(layerName);
+        if (this._isLayerRendered(layerName)) {
+          this._removeLayer(layerName);
         } else {
-          this.addLayer(this.forestTypeLayer);
+          this._addLayer(this.forestTypeLayer);
         }
       }
     },
 
-    addLayer: function(layer){
+    _addLayer: function(layer){
       this.map.overlayMapTypes.insertAt(0, layer);
     },
 
-    isLayerRendered: function(layerName) {
+    _isLayerRendered: function(layerName) {
       var overlaysLength = this.map.overlayMapTypes.getLength();
       if (overlaysLength > 0) {
         for (var i = 0; i< overlaysLength; i++) {
@@ -72,7 +85,7 @@ define([
       }
     },
 
-    removeLayer: function(layerName) {
+    _removeLayer: function(layerName) {
       var overlaysLength = this.map.overlayMapTypes.getLength();
       if (overlaysLength > 0) {
         for (var i = 0; i< overlaysLength; i++) {
@@ -84,7 +97,7 @@ define([
       }
     },
 
-    resize: function() {
+    _resize: function() {
       google.maps.event.trigger(this.map, 'resize');
       this.map.setZoom(this.map.getZoom());
       this.map.setCenter(this.map.getCenter());
