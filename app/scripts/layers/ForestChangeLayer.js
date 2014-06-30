@@ -41,9 +41,9 @@ define([
                 imgdata[pixelPos + 3] = 100;
             }else if(band===2 || band===5|| band===6 || band===8 || band===9 || band===15){
                 //intact
-                imgdata[pixelPos] = 0;
-                imgdata[pixelPos + 1]  = 255;
-                imgdata[pixelPos + 2] = 0;
+                imgdata[pixelPos] = 30;
+                imgdata[pixelPos + 1]  = 90;
+                imgdata[pixelPos + 2] = 60;
                 imgdata[pixelPos + 3] = 100;
 
             }else{
@@ -60,9 +60,9 @@ define([
                 imgdata[pixelPos + 3] = 100;
             }else if(band===2 || band===6 || band===9 ){
                 //intact
-                imgdata[pixelPos] = 0;
-                imgdata[pixelPos + 1]  = 255;
-                imgdata[pixelPos + 2] = 0;
+                imgdata[pixelPos] = 30;
+                imgdata[pixelPos + 1]  = 90;
+                imgdata[pixelPos + 2] = 60;
                 imgdata[pixelPos + 3] = 100;
 
             }else{
@@ -79,9 +79,9 @@ define([
                 imgdata[pixelPos + 3] = 100;
             }else if(band===2 ){
                 //intact
-                imgdata[pixelPos] = 0;
-                imgdata[pixelPos + 1]  = 255;
-                imgdata[pixelPos + 2] = 0;
+                imgdata[pixelPos] = 30;
+                imgdata[pixelPos + 1]  = 90;
+                imgdata[pixelPos + 2] = 60;
                 imgdata[pixelPos + 3] = 100;
 
             }else{
