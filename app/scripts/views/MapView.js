@@ -23,10 +23,10 @@ define([
 
     render: function() {
       var options = {
-        minZoom: 3,
-        zoom: 3,
+        minZoom: 5,
+        zoom: 5,
         mapTypeId: google.maps.MapTypeId.TERRAIN,
-        center: new google.maps.LatLng(20.50, -4.72)
+        center: new google.maps.LatLng(-2.6357885741665936, 121.025390625)
       };
 
       this.map = new google.maps.Map(this.el, options);
