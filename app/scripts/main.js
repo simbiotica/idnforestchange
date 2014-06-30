@@ -10,7 +10,8 @@ require.config({
     Class: '../vendor/Class.js/Class',
     gmap: 'gmap',
     text: '../vendor/requirejs-text/text',
-    mps: '../vendor/minpubsub/minpubsub'
+    mps: '../vendor/minpubsub/minpubsub',
+    d3: '../vendor/d3/d3'
   },
 
   shim: {
@@ -29,6 +30,9 @@ require.config({
     },
     handlebars: {
       exports: 'Handlebars'
+    },
+    d3: {
+      exports: 'd3'
     }
   }
 
